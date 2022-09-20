@@ -12,8 +12,6 @@ app.config['INITIAL_FILE_UPLOADS'] = 'app/static/uploads'
 
 @app.route("/", methods=["GET", "POST"])
 def home():
-    if request.method == "GET":
-        return render_template("index.html")
 
     if request.method == "POST":
         option = request.form['options']
@@ -59,7 +57,8 @@ def home():
             timg.save(os.path.join(app.config['INITIAL_FILE_UPLOADS'], 'image3.png'))
             full_filename = 'static/uploads/image3.png'
             return render_template('index.html', full_filename=full_filename)
-
+    else:
+        return render_template("index.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
